@@ -1,0 +1,55 @@
+---
+resources:
+- name: repo
+  type: git
+  source: 
+    uri: https://github.com/emerald-squad/dotnet-nodejs-docker.git
+    branch: 'master'
+    ignore_paths:
+    - README.md
+    - VERSION
+    - ci/pipeline.yml
+
+- name: version
+  type: semver
+  source: 
+    driver: git
+    uri: git@github.com:emerald-squad/dotnet-nodejs-docker.git
+    branch: 'master'
+    file: VERSION
+    private_key: ((github-key))
+
+- name: docker-hub
+  type: docker-image
+  source:
+    repository: emeraldsquad/dotnet-nodejs
+    username: ((docker-hub-username))
+    password: ((docker-hub-password))
+
+jobs:
+- name: publish
+  plan:
+  - get: repo
+    trigger: true
+  - put: version
+    params:
+      bump: patch
+  - put: docker-hub
+    params:
+      build: repo
+      tag: version/version
+      tag_as_latest: false
+
+- name: tag-as-latest
+  plan:
+  - aggregate:
+    - get: repo
+      passed: [ publish ]
+    - get: docker-hub
+      passed: [ publish ]
+      params:
+        save: true
+  - put: docker-hub
+    params:
+      load: docker-hub
+      tag_as_latest: true
