@@ -3,7 +3,7 @@ resources:
 - name: repo
   type: git
   source: 
-    uri: https://github.com/emerald-squad/dotnet-nodejs-docker.git
+    uri: https://github.com/emerald-squad/dotnet-nodejs.git
     branch: 'master'
     ignore_paths:
     - README.md
@@ -14,7 +14,7 @@ resources:
   type: semver
   source: 
     driver: git
-    uri: git@github.com:emerald-squad/dotnet-nodejs-docker.git
+    uri: git@github.com:emerald-squad/dotnet-nodejs.git
     branch: 'master'
     file: VERSION
     private_key: ((github-key))

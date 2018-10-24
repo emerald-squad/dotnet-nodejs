@@ -1,3 +1,8 @@
-# dotnet-nodejs-docker 
+# Docker image to run .NET Core / Node.js project
 
-Docker image for command node, based on dotnet:2.1.402-sdk
+Currently support the following project types (not exhaustive):
+
+- ASP.NET Core with Angular
+- ASP.NET Core with React.js
+
+Based on dotnet:2.1.402-sdk.
