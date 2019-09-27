@@ -1,3 +1,6 @@
+# DEPRECATION WARNING
+Development have ceased on this resource and pull requests will not be merged in.
+
 # Docker image to run .NET Core / Node.js project
 
 Currently support the following project types (not exhaustive):
